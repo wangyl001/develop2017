@@ -1,4 +1,7 @@
 node_modules/
+<<<<<<< HEAD
 public/components
 .nyc_output
 .sass-cache
+=======
+>>>>>>> e8ca6d221d4bd7547027a121fbbd35341e71d36a
