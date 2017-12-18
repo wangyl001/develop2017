@@ -1,7 +1,7 @@
-extends ../layout
+include  ../layout
 body
   block header
-  .blog-masthead
+   .blog-masthead
     .container
       nav.blog-nav
         a.blog-nav-item.active(href="#") Home
@@ -9,3 +9,5 @@ body
         a.blog-nav-item(href="#") Press
         a.blog-nav-item(href="#") New hires
         a.blog-nav-item(href="#") About
+  block content
+</html>
