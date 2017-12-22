@@ -12,7 +12,21 @@ router.get('/', (req, res, next) => {
     if (err) return next(err);
     res.render('blog/index', {
       title: 'Generator-Express MVC',
-      articles: articles
+      articles: articles,
+      pretty:true,
     });
   });
+});
+router.get('/about', (req, res, next) => {
+    res.render('blog/index', {
+      title: 'About me',
+      pretty:true,
+    });
+});
+router.get('/contact', (req, res, next) => {
+    res.render('blog/index', {
+      title: 'Contact me',
+      pretty:true,
+    });
+
 });

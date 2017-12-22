@@ -1,13 +1,54 @@
-include  ../layout
-body
+extends  ../layout
+
+append css
+  link(rel='stylesheet',href='/css/blog.css')
+block main
   block header
-   .blog-masthead
-    .container
-      nav.blog-nav
-        a.blog-nav-item.active(href="#") Home
-        a.blog-nav-item(href="#") New features
-        a.blog-nav-item(href="#") Press
-        a.blog-nav-item(href="#") New hires
-        a.blog-nav-item(href="#") About
-  block content
-</html>
+    .blog-masthead
+      .container
+        nav.blog-nav
+          if pageName=="/"
+              a.blog-nav-item.active(href="/") 首页
+          else
+              a.blog-nav-item(href="/") 首页
+          if pageName=="/contact"
+              a.blog-nav-item.active(href="/contact") 关于
+          else
+              a.blog-nav-item(href="/contact") 关于
+          if pageName=="/about"
+              a.blog-nav-item.active(href="/about") 练习
+          else
+            a.blog-nav-item(href="/about") 练习
+  .container
+      .row
+        .col-sm-8.blog-main
+            block content
+        .col-sm-3.col-sm-offset-1.blog-sidebar
+          .sidebar-module
+            h4 文章分类
+            ol.list-unstyled
+              li
+                a(href="#") March 2014
+              li
+                a(href="#") February 2014
+              li
+                a(href="#") January 2014
+              li
+                a(href="#") December 2013
+          .sidebar-module
+            h4 友情链接
+            ol.list-unstyled
+              li
+                a(href="#") GitHub
+              li
+                a(href="#") Twitter
+              li
+                a(href="#") Facebook
+
+  block footer
+    footer.blog-footer
+      p
+        a(href="http://getbootstrap.com") Bootstrap
+        a(href="https://twitter.com/modo") @mdo
+      p
+        a(href="#") Back to top

@@ -12,10 +12,15 @@ module.exports = (app, config) => {
   const env = process.env.NODE_ENV || 'development';
   app.locals.ENV = env;
   app.locals.ENV_DEVELOPMENT = env == 'development';
-  
+
   app.set('views', config.root + '/app/views');
   app.set('view engine', 'jade');
-
+  //wangyl add 添加一个中间键让水流往下流
+  app.use(function(req,res,next){
+    app.locals.pageName=req.path;
+    //console.log(app.locals.pageName);
+    next();//这里加next 意思是可以匹配接下来的路由
+  })
   // app.use(favicon(config.root + '/public/img/favicon.ico'));
   app.use(logger('dev'));
   app.use(bodyParser.json());
