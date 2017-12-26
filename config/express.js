@@ -15,7 +15,11 @@ module.exports = (app, config) => {
 
   app.set('views', config.root + '/app/views');
   app.set('view engine', 'jade');
-  //wangyl add 添加一个中间键让水流往下流
+  //Once set, the value of app.locals properties persist
+  // throughout the life of the application,
+  // in contrast with res.locals properties that are valid
+  // only for the lifetime of the request.
+  //wangyl add 添加一个中间键让水流往下流 主要是记住 全局的pageName 给全局添加一个
   app.use(function(req,res,next){
     app.locals.pageName=req.path;
     //console.log(app.locals.pageName);
