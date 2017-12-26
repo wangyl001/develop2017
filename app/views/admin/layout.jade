@@ -1,7 +1,9 @@
 extends  ../layout
 
 append css
+  link(rel='stylesheet',href='/components/font-awesome/css/font-awesome.css')
   link(rel='stylesheet',href='/css/admin.css')
+
 block main
   nav.navbar.navbar-inverse.navbar-fixed-top
     .container-fluid
@@ -11,51 +13,45 @@ block main
           span.icon-bar
           span.icon-bar
           span.icon-bar
-        a.navbar-brand(href='#') Project name
+        a.navbar-brand(href='#') Node.js 全栈博客系统
       #navbar.navbar-collapse.collapse
         ul.nav.navbar-nav.navbar-right
           li
-            a(href='#') Dashboard
+            a(href='/admin/users/logout')
+              i.fa.fa-unlock-alt
+              |&nbsp;注销
           li
-            a(href='#') Settings
-          li
-            a(href='#') Profile
-          li
-            a(href='#') Help
-        form.navbar-form.navbar-right
-          input.form-control(type='text', placeholder='Search...')
+            a(href='#')
+              i.fa.fa-question
+              |&nbsp;帮助
+
   .container-fluid
     .row
       .col-sm-3.col-md-2.sidebar
         ul.nav.nav-sidebar
           li.active
-            a(href='#')
-              | Overview
-              span.sr-only (current)
+            a(href='/admin/post/list')
+              i.fa.fa-files-o
+              |&nbsp;文章列表
           li
-            a(href='#') Reports
+            a(href='/admin/post/add')
+              i.fa.fa-file-o
+              | &nbsp;添加文章
           li
-            a(href='#') Analytics
+            a(href='/admin/categories/list')
+              i.fa.fa-th-list
+              | &nbsp;分类列表
           li
-            a(href='#') Export
+            a(href='/admin/categories/add')
+              i.fa.fa-plus
+              | &nbsp;添加分类
         ul.nav.nav-sidebar
           li
-            a(href='') Nav item
-          li
-            a(href='') Nav item again
-          li
-            a(href='') One more nav
-          li
-            a(href='') Another nav item
-          li
-            a(href='') More navigation
-        ul.nav.nav-sidebar
-          li
-            a(href='') Nav item again
-          li
-            a(href='') One more nav
-          li
-            a(href='') Another nav item
+            a(href='/admin/post/list')
+              i.fa.fa-lock
+              | &nbsp;修改密码
+
+
       .col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2.main
           block content
 

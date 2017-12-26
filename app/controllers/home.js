@@ -1,18 +1,18 @@
 var express = require('express');
     router = express.Router();
     mongoose = require('mongoose');
-    Article = mongoose.model('Article');
+    Post = mongoose.model('Post');
 
 module.exports = (app) => {
   app.use('/', router);
 };
 //添加两个路由
 router.get('/', (req, res, next) => {
-  Article.find((err, articles) => {
+  Post.find((err, post) => {
     if (err) return next(err);
     res.render('blog/index', {
       title: 'Generator-Express MVC',
-      articles: articles,
+      post: post,
       pretty:true,
     });
   });
