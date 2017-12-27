@@ -1,9 +1,33 @@
 extends layout
 
 block content
-  div.container
-      h1=title
-      p Welcome to #{title}
+   each post in posts
+       div.post
+             h3.post-title
+                 a(href="/posts/view/"+post._id,target="_blank")
+                   =post.title
+             div.post-abstract
+                 =post.content
+             div.post-meta
+                  span.post-created
+                    | 发布时间
+                    =post.created
+                  span.post-author
+                    | 作者
+                    =post.author.name
+                  span.post-category
+                    | 分类
+                    =post.category.title
+                  span.post-comments
+                    | 评论
+                    =post.comments.length
+                  span.post-meta
+                    | 被赞
+                    =post.meta.favourates
+                  span.post-link
+                      a(href="/posts/view/"+post._id,target="_blank") 查看全文
 
+block scripts
+   script $(document).ready(function () {console.log('dom ready');})
 
 
