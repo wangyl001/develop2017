@@ -1,0 +1,3 @@
+npm install moment --save //moment
+npm install lorem-ipsum --save //lorem-ipsum 随机产生
+npm install truncate --save //做文本截取的

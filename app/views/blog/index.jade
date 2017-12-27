@@ -7,25 +7,36 @@ block content
                  a(href="/posts/view/"+post._id,target="_blank")
                    =post.title
              div.post-abstract
-                 =post.content
+                 =truncate(post.content,160)
              div.post-meta
                   span.post-created
-                    | 发布时间:
-                    =moment(post.created).format('YYYY-MM-DD')
+                    | 发布时间:&nbsp;
+                    =moment(post.created).format('YYYY-MM-DD HH:mm:ss')
                   span.post-author
-                    | 作者：
+                    | 作者：&nbsp;
                     =post.author.name
                   span.post-category
-                    | 分类：
+                    | 分类：&nbsp;
                     =post.category.name
                   span.post-comments
-                    | 评论：
+                    | 评论：&nbsp;
                     =post.comments.length || 0
                   span.post-meta
-                    | 被赞：
+                    | 被赞：&nbsp;
                     =post.meta.favourates || 0
                   span.post-link
                       a(href="/posts/view/"+post._id,target="_blank") 查看全文
+   if pageCount >1
+      nav
+        ul.pagination
+           - var currentPage=1
+           while currentPage<pageCount
+              if(currentPage===pageNum)
+                  li.active
+                      a(href="/posts?page=" + currentPage)= currentPage++
+              else
+                  li
+                    a(href="/posts?page=" + currentPage)= currentPage++
 
 block scripts
    script $(document).ready(function () {console.log('dom ready');})

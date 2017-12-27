@@ -9,14 +9,29 @@ module.exports = (app) => {
 //添加两个路由
 router.get('/', (req, res, next) => {
   /*外键填充*/
-  Post.find().populate('author').populate('category').exec((err, posts) => {
+  Post.find({published:true})
+    .sort('created')
+    .populate('author')
+    .populate('category')
+    .exec((err, posts) => {
     //return res.jsonp(posts); //返回数据库的 用于调试返回 数据库的数据
     if (err) return next(err);
     //console.log(err+"!!!!");
-    res.render('blog/index', {
-      posts: posts,
-      pretty:true,
-    });
+      //pageNum 变成正整数
+      //通过req.query.page 方法将page 传值
+      var pageNum=Math.abs(parseInt(req.query.page||1,10));
+      var pageSize=10;
+      var totalCount=posts.length;
+      var pageCount=Math.ceil(totalCount/pageSize);
+      if(pageNum>pageCount){
+        pageNum=pageCount;
+      }
+      res.render('blog/index', {
+          posts: posts.slice((pageNum-1)*pageSize,pageNum*pageSize),
+          pageNum:pageNum,
+          pageCount:pageCount,
+          pretty:true,
+        });
   });
 });
 //添加两个路由 about
