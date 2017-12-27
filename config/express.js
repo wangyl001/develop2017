@@ -3,6 +3,7 @@ const glob = require('glob');
 
 const favicon = require('serve-favicon');
 const logger = require('morgan');
+const moment=require('moment');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const compress = require('compression');
@@ -22,6 +23,7 @@ module.exports = (app, config) => {
   //wangyl add 添加一个中间键让水流往下流 主要是记住 全局的pageName 给全局添加一个
   app.use(function(req,res,next){
     app.locals.pageName=req.path;
+    app.locals.moment=moment;
     //console.log(app.locals.pageName);
     next();//这里加next 意思是可以匹配接下来的路由
   })

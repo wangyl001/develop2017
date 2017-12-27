@@ -10,20 +10,20 @@ block content
                  =post.content
              div.post-meta
                   span.post-created
-                    | 发布时间
-                    =post.created
+                    | 发布时间:
+                    =moment(post.created).format('YYYY-MM-DD')
                   span.post-author
-                    | 作者
+                    | 作者：
                     =post.author.name
                   span.post-category
-                    | 分类
-                    =post.category.title
+                    | 分类：
+                    =post.category.name
                   span.post-comments
-                    | 评论
-                    =post.comments.length
+                    | 评论：
+                    =post.comments.length || 0
                   span.post-meta
-                    | 被赞
-                    =post.meta.favourates
+                    | 被赞：
+                    =post.meta.favourates || 0
                   span.post-link
                       a(href="/posts/view/"+post._id,target="_blank") 查看全文
 

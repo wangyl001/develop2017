@@ -10,7 +10,7 @@ module.exports = (app) => {
 router.get('/', (req, res, next) => {
   /*外键填充*/
   Post.find().populate('author').populate('category').exec((err, posts) => {
-    //return res.jsonp(posts); //返回数据库的
+    //return res.jsonp(posts); //返回数据库的 用于调试返回 数据库的数据
     if (err) return next(err);
     //console.log(err+"!!!!");
     res.render('blog/index', {

@@ -144,7 +144,7 @@ h6, .h6 {
 }
 .post-title{
   border-bottom:1px solid #eeeeee;
-  border-width:1px 0;
+  border-width:1px;
   padding:5px 0;
 }
 .post-abstract{
@@ -155,7 +155,7 @@ h6, .h6 {
 }
 .post-meta>span{
   display: inline-block;
-  padding-right:;
+  padding-right: 5px;
   margin:0 5px;
   border-right:1px dotted #DDDDDD;
 }
