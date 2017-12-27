@@ -8,11 +8,13 @@ module.exports = (app) => {
 };
 //添加两个路由
 router.get('/', (req, res, next) => {
-  Post.find((err, post) => {
+  /*外键填充*/
+  Post.find().populate('author').populate('category').exec((err, posts) => {
+    return res.jsonp(posts); //返回数据库的
     if (err) return next(err);
     res.render('blog/index', {
       title: 'Generator-Express MVC',
-      post: post,
+      post: posts,
       pretty:true,
     });
   });

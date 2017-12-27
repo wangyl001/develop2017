@@ -9,7 +9,7 @@ const config = {
       name: 'develop2017'
     },
     port: process.env.PORT || 3000,
-    db: 'mongodb://localhost/develop2017-development'
+    db: 'mongodb://localhost/nodeblog'
   },
 
   test: {
@@ -18,7 +18,7 @@ const config = {
       name: 'develop2017'
     },
     port: process.env.PORT || 3000,
-    db: 'mongodb://localhost/develop2017-test'
+    db: 'mongodb://localhost/hello-nodeblog-test'
   },
 
   production: {
@@ -27,7 +27,7 @@ const config = {
       name: 'develop2017'
     },
     port: process.env.PORT || 3000,
-    db: 'mongodb://localhost/develop2017-production'
+    db: 'mongodb://localhost/hello-nodeblog-production'
   }
 };
 
