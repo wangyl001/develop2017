@@ -166,6 +166,25 @@ h6, .h6 {
   margin-right:0px;
   border-right:0px;
 }
+.post-view-header{
+  text-align:center;
+}
+
+.post-view .post-meta {
+  border-bottom:1px dotted #DDDDDD;
+  padding-bottom:20px;
+  margin-bottom:20px;
+  text-align: center;
+}
+.post-view .post-content{
+  text-indent: 2em;
+  padding-top: 20px;
+  text-align:justify;
+}
+.post-comments,
+.post-comments-form{
+  margin-top:30px;
+}
 /*
  * Footer
  */
