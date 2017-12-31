@@ -185,6 +185,16 @@ h6, .h6 {
 .post-comments-form{
   margin-top:30px;
 }
+
+.post-comment-item{
+  border:1px dotted #eeeeee;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+.post-comment-email{
+  border-bottom: 1px dotted #DDDDDD;
+  padding-bottom: 5px;
+}
 /*
  * Footer
  */

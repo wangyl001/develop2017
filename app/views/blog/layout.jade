@@ -3,6 +3,8 @@ extends  ../layout
 append css
   link(rel='stylesheet',href='/components/font-awesome/css/font-awesome.css')
   link(rel='stylesheet',href='/css/blog.css')
+
+
 block main
   //导航栏的内容
   block header
@@ -24,6 +26,7 @@ block main
   .container
       .row
         .col-sm-8.blog-main
+           !=messages()
            //主要内容区域
            block content
         .col-sm-3.col-sm-offset-1.blog-sidebar

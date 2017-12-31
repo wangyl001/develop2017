@@ -1,3 +1,6 @@
 npm install moment --save //moment
 npm install lorem-ipsum --save //lorem-ipsum 随机产生
 npm install truncate --save //做文本截取的
+npm insatll express-session --save //做session 服务器端会话
+npm insatll connect-flash --save//会话传递 提供一个便利的方法
+npm install express-messages --save

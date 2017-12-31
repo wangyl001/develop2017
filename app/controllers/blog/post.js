@@ -3,7 +3,7 @@ var express = require('express');
     mongoose = require('mongoose');
     Post = mongoose.model('Post');
     Category=mongoose.model('Category');
-
+    moment=require('moment');
 module.exports = (app) => {
   app.use('/posts', router);//路由的挂载点
 };
@@ -31,12 +31,13 @@ router.get('/', (req, res, next) => {
           posts: posts.slice((pageNum-1)*pageSize,pageNum*pageSize),
           pageNum:pageNum,
           pageCount:pageCount,
-          pretty:true,
+          pretty:true
         });
   });
 });
 router.get('/category/:name', (req, res, next) => {
    //res.jsonp(req.params);
+
   Category.findOne({name:req.params.name}).exec(function(err,category){
      if(err){
        return next(err);
@@ -79,16 +80,15 @@ router.get('/view/:id', (req, res, next) => {
       }
 
       res.render('blog/view', {
-        post: post,
+        post: post
       });
     });
 });
 //添加两个路由 contact 路由
-router.get('/comment', (req,  res, next) => {
 
-});
 router.post('/comment/:id',(req,res,next) => {
     //res.jsonp(req.body);//测试下看看看数据有没有过来
+   //用户发过来的数据进行校验
     if (!req.params.id) {
       return next(new Error('no email provided for commenter'));
     }
@@ -101,15 +101,23 @@ router.post('/comment/:id',(req,res,next) => {
     } catch (err) {
       conditions.slug = req.params.id;
     }
+    console.log(req.params.id);
     Post.findOne(conditions).exec(function (err,post) {
       if(err){
         return next(err);
       }
-      var comment={email:req.body.email,content:req.body.content}
+      var comment={
+                   email:req.body.email,
+                   content:req.body.content,
+                   created:moment(new Date()).format('YYYY-MM-DD HH:mm:ss')
+                 };
+      /*comments是一个数组 unshift直接是在上面*/
       post.comments.unshift(comment);
       post.markModified('comment');
       post.save(function(err,post){
-         res.redirect('/posts/view/'+post.slug);
+        /*直接跳转到文章的详情页面*/
+        req.flash('info','评论添加成功！！！');
+        res.redirect('/posts/view/'+post.slug);
       })
     });
 
@@ -126,7 +134,7 @@ router.get('/favorite/:id', (req, res, next) => {
   } catch (err) {
     conditions.slug = req.params.id;
   }
-
+  /*外键填充这样的作用其实是仿制关系数据库中的外键*/
   Post.findOne(conditions)
     .populate('category')
     .populate('author')
@@ -139,6 +147,7 @@ router.get('/favorite/:id', (req, res, next) => {
       //混合类型因为没有特定约束，因此可以任意修改，一旦修改了原型，则必须调用markModified()
       post.markModified('meta');
       post.save(function (err) {
+        req.flash('info','点赞成功！！！');
         res.redirect('/posts/view/' + post.slug);
       });
     });

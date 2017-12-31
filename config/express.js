@@ -11,6 +11,11 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const compress = require('compression');
 const methodOverride = require('method-override');
+
+const session =require('express-session');
+const flash=require('connect-flash');
+const messages=require('express-messages');
+
 const mongoose=require('mongoose');
 const Category=mongoose.model('Category');
 module.exports = (app, config) => {
@@ -50,7 +55,19 @@ module.exports = (app, config) => {
   app.use(bodyParser.urlencoded({
     extended: true
   }));
+
   app.use(cookieParser());
+  app.use(session({
+    secret: 'nodeblog',
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: false }
+  }));
+  app.use(flash());
+  app.use(function(req,res,next){
+      res.locals.messages=messages(req,res);
+      next();
+  })
   app.use(compress());
   app.use(express.static(config.root + '/public'));
   app.use(methodOverride());

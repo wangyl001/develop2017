@@ -1,0 +1,153 @@
+//继承上一级的layout
+extends ../layout
+
+block content
+  h2.page-header 文章列表
+
+  table.table.table-bordered
+     thread
+          tr
+             th(width="30%")
+               if sortby=='title'
+                  if(sortdir==='desc')
+                     a(href="/admin/posts?page=" + pageNum + "&sortby=title&sortdir=desc")
+                       i.fa.fa-arrow-down
+                       | &nbsp;标题
+                  else
+                     a(href="/admin/posts?page="+pageNum + "&sortby=title&sortdir=asc")
+                       i.fa.fa-arrow-up
+                         | &nbsp;标题
+               else
+                  a(href="/admin/posts?page=" + pageNum + "&sortby=title&sortdir=desc")
+                     i.fa.fa-arrow-down
+                     | 标题
+             th
+               if sortby == 'category'
+                 if(sortdir === 'desc')
+                   a(href="/admin/posts?page=" + pageNum + "&sortby=category&sortdir=asc")
+                     i.fa.fa-arrow-down
+                     | &nbsp;分类
+                 else
+                   a(href="/admin/posts?page=" + pageNum + "&sortby=catedory&sortdir=desc")
+                     i.fa.fa-arrow-up
+                       | &nbsp;分类
+               else
+                 a(href="/admin/posts?page=" + pageNum + "&sortby=category&sortdir=desc")
+                   i.fa.fa-arrow-down
+                   | 分类
+             th
+               if sortby == 'author'
+                 if(sortdir === 'desc')
+                   a(href="/admin/posts?page=" + pageNum + "&sortby=author&sortdir=asc")
+                     i.fa.fa-arrow-down
+                     | &nbsp;作者
+                 else
+                   a(href="/admin/posts?page=" + pageNum + "&sortby=author&sortdir=desc")
+                     i.fa.fa-arrow-up
+                       | &nbsp;作者
+               else
+                 a(href="/admin/posts?page=" + pageNum + "&sortby=author&sortdir=desc")
+                   i.fa.fa-arrow-down
+                   | 作者
+             th
+               if sortby == 'created'
+                 if(sortdir === 'desc')
+                   a(href="/admin/posts?page=" + pageNum + "&sortby=created&sortdir=asc")
+                     i.fa.fa-arrow-down
+                     | &nbsp;添加时间
+                 else
+                   a(href="/admin/posts?page=" + pageNum + "&sortby=created&sortdir=desc")
+                     i.fa.fa-arrow-up
+                       | &nbsp;添加时间
+               else
+                 a(href="/admin/posts?page=" + pageNum + "&sortby=created&sortdir=desc")
+                   i.fa.fa-arrow-down
+                   | 添加时间
+             th
+               if sortby == 'created'
+                 if(sortdir === 'desc')
+                   a(href="/admin/posts?page=" + pageNum + "&sortby=favorites&sortdir=asc")
+                     i.fa.fa-arrow-down
+                     | &nbsp;被赞
+                 else
+                   a(href="/admin/posts?page=" + pageNum + "&sortby=favorites&sortdir=desc")
+                     i.fa.fa-arrow-up
+                       | &nbsp;被赞
+               else
+                 a(href="/admin/posts?page=" + pageNum + "&sortby=favorites&sortdir=desc")
+                   i.fa.fa-arrow-down
+                   | 被赞
+             th 评论
+             th
+               if sortby == 'published'
+                 if(sortdir === 'desc')
+                   a(href="/admin/posts?page=" + pageNum + "&sortby=published&sortdir=asc")
+                     i.fa.fa-arrow-down
+                     | &nbsp;状态
+                 else
+                   a(href="/admin/posts?page=" + pageNum + "&sortby=published&sortdir=desc")
+                     i.fa.fa-arrow-up
+                       | &nbsp;状态
+               else
+                 a(href="/admin/posts?page=" + pageNum + "&sortby=published&sortdir=desc")
+                   i.fa.fa-arrow-down
+                   | 状态
+             th 管理
+     tbody
+     each post in posts
+          tr
+             td
+                a(href="/posts/view/"+post._id,target="_blank")=post.title
+             td=post.category.name
+             td=post.author.email
+             td=moment(post.created).format('YYYY-MM-DD HH:mm:ss')
+             td=post.meta.favorites || 0
+             td=post.comments.length || 0
+             td=post.published ? '已发布' : '待发布'
+             td
+               a(href="admin/posts/view/"+post._id,class="btn btn-sm btn-success",target="_blank") | 查看
+               | &nbsp;&nbsp;
+               a(href="/admin/posts/edit/"+post._id,class="btn btn-sm btn-info",target="_blank") | 编辑
+               | &nbsp;&nbsp;
+               a(href="/admin/posts/delete/"+post._id,class="btn btn-sm btn-danger",target="_blank") | 删除
+
+
+
+  if pageCount >1
+    nav
+      ul.pagination
+        - var currentPage=1
+        if(pageNum>1)
+          li
+            - var cc = pageNum
+            a(href="/admin/posts?page=" + --cc+"&sortby="+sortby+"&sortdir="+sortdir,aria-label="Previous")
+              span(aria-hidden="true") &laquo;
+        else
+          li
+            a(href="/admin/posts?page=1"+"&sortby="+sortby+"&sortdir="+sortdir aria-label="Previous")
+              span(aria-hidden="true") &laquo;
+        while currentPage<=pageCount
+          if(currentPage===pageNum)
+            li.active
+              a(href="/admin/posts?page=" + currentPage+"&sortby="+sortby+"&sortdir="+sortdir)= currentPage++
+          else
+            li
+              a(href="/admin/posts?page=" + currentPage+"&sortby="+sortby+"&sortdir="+sortdir)= currentPage++
+
+        if(pageNum < pageCount-2)
+          li
+            - var cc2 = pageNum
+            a(href="/admin/posts?page=" + ++cc2+"&sortby="+sortby+"&sortdir="+sortdir,aria-label="Next")
+              span(aria-hidden="true") &raquo;
+        else
+          li
+            a(href="/admin/posts?page=" + pageNum+"&sortby="+sortby+"&sortdir="+sortdir,aria-label="Next")
+              span(aria-hidden="true") &raquo;
+
+
+block scripts
+  script $(document).ready(function () {console.log('dom ready');})
+
+
+
+
